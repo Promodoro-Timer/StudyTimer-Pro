@@ -9,9 +9,15 @@ const display = document.getElementById('timeDisplay');
 const input = document.getElementById('timeInput');
 
 function updateDisplay() {
-  const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-  const secs = (timeLeft % 60).toString().padStart(2, '0');
-  display.textContent = `${mins}:${secs}`;
+  const hrs = Math.floor(timeLeft / 3600);
+  const mins = Math.floor((timeLeft % 3600) / 60);
+  const secs = timeLeft % 60;
+
+  const formatted = (hrs > 0 ? String(hrs).padStart(2, '0') + ':' : '') +
+                    String(mins).padStart(2, '0') + ':' +
+                    String(secs).padStart(2, '0');
+
+  display.textContent = formatted;
 }
 
 function startTimer() {
@@ -45,36 +51,4 @@ function pauseTimer() {
 function resetTimer() {
   clearInterval(timer);
   timer = null;
-  isPaused = true;
-  isBreak = false;
-  timeLeft = defaultMinutes * 60;
-  updateDisplay();
-  sessionCount = 0;
-  document.getElementById('sessionCount').textContent = 0;
-}
-
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-}
-
-function editTime() {
-  input.classList.remove("hidden");
-  display.classList.add("hidden");
-  input.value = display.textContent;
-  input.focus();
-}
-
-input.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    const [mins, secs] = input.value.split(":").map(Number);
-    if (!isNaN(mins) && !isNaN(secs)) {
-      defaultMinutes = mins;
-      timeLeft = mins * 60 + secs;
-      updateDisplay();
-    }
-    input.classList.add("hidden");
-    display.classList.remove("hidden");
-  }
-});
-
-updateDisplay();
+  isPa
