@@ -51,4 +51,48 @@ function pauseTimer() {
 function resetTimer() {
   clearInterval(timer);
   timer = null;
-  isPa
+  isPaused = true;
+  isBreak = false;
+  timeLeft = defaultMinutes * 60;
+  updateDisplay();
+  sessionCount = 0;
+  document.getElementById('sessionCount').textContent = 0;
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
+
+function editTime() {
+  input.classList.remove("hidden");
+  display.classList.add("hidden");
+  input.value = display.textContent;
+  input.focus();
+}
+
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    const value = input.value.trim();
+    let h = 0, m = 0, s = 0;
+    const parts = value.split(":").map(part => parseInt(part, 10));
+
+    if (parts.length === 3) {
+      [h, m, s] = parts;
+    } else if (parts.length === 2) {
+      [m, s] = parts;
+    } else if (parts.length === 1) {
+      [m] = parts;
+    }
+
+    if (!isNaN(h) && !isNaN(m) && !isNaN(s)) {
+      defaultMinutes = h * 60 + m;
+      timeLeft = h * 3600 + m * 60 + s;
+      updateDisplay();
+    }
+
+    input.classList.add("hidden");
+    display.classList.remove("hidden");
+  }
+});
+
+updateDisplay();
