@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pomodoro Timer</title>
+  <title>Study Timer Pro</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
   <div class="timer-container">
     <h1 id="timer" onclick="editTime()">
       <span id="timeDisplay">25:00</span>
-      <input id="timeInput" class="hidden" type="text" maxlength="5" placeholder="mm:ss" />
+      <input id="timeInput" class="hidden" type="text" maxlength="8" placeholder="hh:mm:ss" />
     </h1>
 
     <div class="controls">
@@ -21,7 +21,7 @@
       <button onclick="resetTimer()">🔁 Reset</button>
     </div>
 
-    <p id="quote">"Knowledge is not what is memorized. Knowledge is what benefits."<br>— Ibn Taymiyyah</p>
+    <p id="quote">"Knowledge is not what is memorized. Knowledge is what benefits." — Ibn Taymiyyah</p>
     <p>🧠 Sessions Completed: <span id="sessionCount">0</span></p>
     <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
     <audio id="alarmSound" src="https://freesound.org/data/previews/337/337049_3232194-lq.mp3"></audio>
